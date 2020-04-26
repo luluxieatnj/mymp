@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xll.mymp.mapper.IEmpMapper" >
+
+    <resultMap id="empMap" type="emp">
+        <id property="empno" column="empno"/>
+        <result property="ename" column="ename"/>
+        <result property="job" column="job"/>
+        <result property="mgr" column="mgr"/>
+        <result property="hiredate" column="hiredate"/>
+        <result property="sal" column="sal"/>
+        <result property="comm" column="comm"/>
+        <result property="deptno" column="deptno"/>
+        <association property="dept" javaType="dept">
+           <id property="deptno" column="deptno"/>
+            <result property="dname" column="dname"/>
+            <result property="loc" column="loc"/>
+        </association>
+    </resultMap>
+
+
+    <!--Emp selectByEmpno(Integer empnp);  配置type-aliases-package，直接使用类名  -->
+    <select id="selectByEmpno" parameterType="integer" resultType="emp">
+        select * from emp where empno = #{empno}
+    </select>
+
+    <!-- selectByEmpno2 -->
+    <select id="selectByEmpno2" parameterType="integer" resultMap="empMap">
+       select
+        e.empno empno,
+        e.ename ename,
+        e.job job,
+        e.mgr mgr,
+        e.hiredate hiredate,
+        e.sal sal,
+        e.comm comm,
+        e.deptno deptno,
+        d.dname dname,
+        d.loc loc
+    from emp e INNER JOIN dept d on e.deptno = d.deptno
+    where e.empno = #{empno}
+    </select>
+
+</mapper>

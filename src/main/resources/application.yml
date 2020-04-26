@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mymp?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#mybatis plus 设置
+mybatis-plus:
+  # 不能写错，而且要写到impl层
+  mapper-locations: classpath:com/xll/mymp/mapper/impl/*Mapper.xml
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      # 默认数据库表下划线命名
+      table-underline: true
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 实体类所在包，有了它，就可以在*Mapper.xml中 愉快的使用使用类名代替类全名了(类名可以小写呦)
+  type-aliases-package: com.xll.mymp.entity
