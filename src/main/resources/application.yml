@@ -2,7 +2,6 @@ server:
   port: 8080
   servlet:
     context-path: /
-
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -13,7 +12,7 @@ spring:
 
 #mybatis plus 设置
 mybatis-plus:
-  # 不能写错，而且要写到impl层
+  # 不能写错，而且要写到impl层  另外，xml文件配置在代码包下，pom文件buil标签下需要加载resources
   mapper-locations: classpath:com/xll/mymp/mapper/impl/*Mapper.xml
   global-config:
     # 关闭MP3.0自带的banner
